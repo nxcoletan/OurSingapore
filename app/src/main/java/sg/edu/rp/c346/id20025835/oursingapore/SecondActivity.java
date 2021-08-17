@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class SecondActivity extends AppCompatActivity {
     ListView lv;
-    ArrayList<Island> songList;
+    ArrayList<Island> islandList;
     CustomAdapter caIsland;
     int requestCode = 9;
     Button btn5Stars;
@@ -27,7 +27,7 @@ public class SecondActivity extends AppCompatActivity {
             btn5Stars = (Button) this.findViewById(R.id.btnShow5Stars);
 
             DBHelper dbh = new DBHelper(this);
-            songList = dbh.getAllIsland();
+            islandList = dbh.getAllIsland();
             dbh.close();
 
             caIsland = new CustomAdapter(this, R.layout.row, islandList);
@@ -37,7 +37,7 @@ public class SecondActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent i = new Intent(SecondActivity.this, ThirdActivity.class);
-                    i.putExtra("song", songList.get(position));
+                    i.putExtra("song", islandList.get(position));
                     startActivityForResult(i, requestCode);
                 }
             });
@@ -57,8 +57,8 @@ public class SecondActivity extends AppCompatActivity {
         protected void onActivityResult(int requestCode, int resultCode, Intent data) {
             if(requestCode == this.requestCode && resultCode == RESULT_OK){
                 DBHelper dbh = new DBHelper(this);
-                songList.clear();
-                songList.addAll(dbh.getAllIsland());
+                islandList.clear();
+                islandList.addAll(dbh.getAllIsland());
                 dbh.close();
                 caIsland.notifyDataSetChanged();
             }

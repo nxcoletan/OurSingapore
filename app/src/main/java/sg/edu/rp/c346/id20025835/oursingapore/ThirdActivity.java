@@ -57,46 +57,48 @@ public class ThirdActivity extends AppCompatActivity {
             }
 
             btnUpdate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AlertDialog.Builder myBuilder = new AlertDialog.Builder(ThirdActivity.this);
-                    myBuilder.setTitle("Danger");
-                    myBuilder.setMessage("Are you sure you want to discard the changes?");
-                    myBuilder.setCancelable(false);
+                                             @Override
+                                             public void onClick(View v) {
+                                                 AlertDialog.Builder myBuilder = new AlertDialog.Builder(ThirdActivity.this);
+                                                 myBuilder.setTitle("Danger");
+                                                 myBuilder.setMessage("Are you sure you want to discard the changes?");
+                                                 myBuilder.setCancelable(false);
 
-                    myBuilder.setPositiveButton("Discard", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            DBHelper dbh = new DBHelper(ThirdActivity.this);
-                            currentIsland.setName(etName.getText().toString().trim());
-                            currentIsland.setDescription(etDescription.getText().toString().trim());
-                            int area = 0;
-                            try {
-                                area = Integer.valueOf(etArea.getText().toString().trim());
-                            } catch (Exception e){
-                                Toast.makeText(ThirdActivity.this, "Invalid year", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                            currentIsland.setArea(area);
+                                                 myBuilder.setPositiveButton("Discard", new DialogInterface.OnClickListener() {
+                                                     @Override
+                                                     public void onClick(DialogInterface dialog, int which) {
+                                                         DBHelper dbh = new DBHelper(ThirdActivity.this);
+                                                         currentIsland.setName(etName.getText().toString().trim());
+                                                         currentIsland.setDescription(etDescription.getText().toString().trim());
+                                                         int area = 0;
+                                                         try {
+                                                             area = Integer.valueOf(etArea.getText().toString().trim());
+                                                         } catch (Exception e) {
+                                                             Toast.makeText(ThirdActivity.this, "Invalid year", Toast.LENGTH_SHORT).show();
+                                                             return;
+                                                         }
+                                                         currentIsland.setArea(area);
 
-                            int selectedRB = rg.getCheckedRadioButtonId();
-                            RadioButton rb = (RadioButton) findViewById(selectedRB);
-                            currentIsland.setStars(Integer.parseInt(rb.getText().toString()));
-                            int result = dbh.updateIsland(currentIsland);
-                            if (result>0){
-                                Toast.makeText(ThirdActivity.this, "Island updated", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent();
-                                setResult(RESULT_OK);
-                                finish();
-                    });
+                                                         int selectedRB = rg.getCheckedRadioButtonId();
+                                                         RadioButton rb = (RadioButton) findViewById(selectedRB);
+                                                         currentIsland.setStars(Integer.parseInt(rb.getText().toString()));
+                                                         int result = dbh.updateIsland(currentIsland);
+                                                         if (result > 0) {
+                                                             Toast.makeText(ThirdActivity.this, "Island updated", Toast.LENGTH_SHORT).show();
+                                                             Intent i = new Intent();
+                                                             setResult(RESULT_OK);
+                                                             finish();
+                                                         }
+                                                         ;
 
-                    myBuilder.setNeutralButton("Do Not Discard", null);
-                    AlertDialog myDialog = myBuilder.create();
-                    myDialog.show();
-                    Toast.makeText(ThirdActivity.this, "Update failed", Toast.LENGTH_SHORT).show();
-                }
-        });
-
+                                                         myBuilder.setNeutralButton("Do Not Discard", null);
+                                                         AlertDialog myDialog = myBuilder.create();
+                                                         myDialog.show();
+                                                         Toast.makeText(ThirdActivity.this, "Update failed", Toast.LENGTH_SHORT).show();
+                                                     }
+                                                 });
+                                             }
+                                         });
 
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -131,8 +133,7 @@ public class ThirdActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     finish();
-                }
+                };
             });
-        }
     }
 }

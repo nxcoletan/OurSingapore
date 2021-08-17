@@ -45,12 +45,7 @@ public class CustomAdapter extends ArrayAdapter {
             tvDescription.setText(currentList.getDescription());
             ratingBar.setRating(currentList.getStars());
 
-            if (currentList.getYearReleased() >= 2019) {
-                ivNew.setVisibility(View.VISIBLE);
-            } else {
-                ivNew.setVisibility(View.INVISIBLE);
-            }
             return rowView;
-        }
     }
 }
+
